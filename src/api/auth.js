@@ -24,3 +24,19 @@ export const registerUser = async (username, password) => {
     console.error(error);
   }
 }
+
+export const fetchMe = async (token) => {
+  try {
+    const response = await fetch(`${BASE_URL}/users/me`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    });
+    const {data} = await response.json();
+    // console.log(result, 'this is result in fetchme');
+    return data
+  } catch (error) {
+    console.error(error);
+  }
+}

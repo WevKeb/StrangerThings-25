@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { registerUser } from '../api/auth';
 
-const Register = () => {
+const Register = ({setToken}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -13,7 +13,9 @@ const Register = () => {
           try {
             e.preventDefault();
             const token = await registerUser(username, password);
-            console.log(token,'in insubmit this is token');
+            localStorage.setItem('token', token);
+            setToken(token);
+
             setUsername('');
             setPassword('');
           } catch (error) {
@@ -39,7 +41,7 @@ const Register = () => {
           ></input>
         <button 
           type='submit'
-        >Submit!</button>
+        >Submit</button>
       </form>
     </div>
   );
