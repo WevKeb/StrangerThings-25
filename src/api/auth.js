@@ -63,8 +63,20 @@ export const loginUser = async (username, password) => {
       }
     );
     const result = await response.json();
-    console.log(result.data.token);
+    // console.log(result.data.token);
     return result.data.token;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const fetchAllPosts = async () => {
+  try {
+    const response = await fetch(
+      `https://strangers-things.herokuapp.com/api/2211-FTB-ET-WEB-FT/posts`
+    );
+    const result = await response.json();
+    console.log(result.data.posts);
   } catch (error) {
     console.error(error);
   }

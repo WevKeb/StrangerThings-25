@@ -3,6 +3,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import { fetchMe } from "./api/auth";
 import { useEffect, useState } from "react";
+import { fetchAllPosts } from "./api/auth";
 
 function App () {
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -18,6 +19,8 @@ function App () {
     getMe();
     }
   }, [token]);
+
+  fetchAllPosts();
 
   return (
     <div className="App">
