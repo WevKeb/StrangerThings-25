@@ -1,5 +1,6 @@
 import "./App.css";
 import Register from "./components/Register";
+import Login from "./components/Login";
 import { fetchMe } from "./api/auth";
 import { useEffect, useState } from "react";
 
@@ -20,8 +21,13 @@ function App () {
 
   return (
     <div className="App">
-      <h1>{user?.username}</h1>
-      <Register setToken={setToken}/>
+      <header>
+        <Register setToken={setToken}/>
+        <Login setToken={setToken}/>
+      </header>
+      <div>
+        Helloworld!
+      </div>
     </div>
   ) 
 };

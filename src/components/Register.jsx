@@ -7,8 +7,9 @@ const Register = ({setToken}) => {
   const [password, setPassword] = useState('');
   
   return (
-    <div>
+    <div className='reg-container'>
       <form 
+        className='reg-form'
         onSubmit={async (e)=>{
           try {
             e.preventDefault();
