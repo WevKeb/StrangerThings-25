@@ -1,16 +1,19 @@
-import "./App.css";
+
 import Register from "./components/Register";
 import Login from "./components/Login";
+import { Routes, Route } from "react-router-dom";
 import PostsList from "./components/PostsList";
 import { fetchMe } from "./api/auth";
 import { useEffect, useState } from "react";
 import { fetchAllPosts } from "./api/auth";
+import Header from "./components/Header";
 
 function App () {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [user, setUser] = useState({});
   const [posts, setPosts] = useState([]);
   
+  //useeffect to retrieve logged in user data. set to user, when token is set
   useEffect(()=>{
     const getMe = async ()=>{
       const data = await fetchMe(token);
@@ -19,9 +22,11 @@ function App () {
 
     if (token) {
     getMe();
+    console.log('this is user set in getMe useeffect', user);
     }
   }, [token]);
 
+  //useeffect to setinitialposts on first render
   useEffect( ()=>{
     const getInitialPosts = async ()=>{
       try {
@@ -37,13 +42,16 @@ function App () {
 
   return (
     <div className="App">
-      <header>
-        <Register setToken={setToken}/>
-        <Login setToken={setToken}/>
-      </header>
-      <div>
-        <PostsList posts={posts} setPosts={setPosts}/>
-      </div>
+      <Header user={user} setToken={setToken}/>
+      <Routes>
+        <Route
+          path='/'
+          element={<PostsList posts={posts} setPosts={setPosts}/>}
+        ></Route>
+        {/* add route for register page */}
+        {/* add route for user 'mypage' */}
+      </Routes>
+      
     </div>
   ) 
 };
