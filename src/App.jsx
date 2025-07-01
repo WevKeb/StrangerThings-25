@@ -45,10 +45,13 @@ function App () {
       <Header user={user} setToken={setToken}/>
       <Routes>
         <Route
-          path='/'
+          path='/home'
           element={<PostsList posts={posts} setPosts={setPosts}/>}
         ></Route>
-        {/* add route for register page */}
+        <Route 
+          path='/register'
+          element={<Register setToken={setToken}/>}
+        ></Route>
         {/* add route for user 'mypage' */}
       </Routes>
       

@@ -1,0 +1,18 @@
+.login-form {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.navbar-login-corner {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.divider {
+  color: white;
+  font-size: 2rem; 
+  line-height: 1;
+
+}

@@ -1,0 +1,20 @@
+.navbar {
+    display: flex;
+    flex-direction: row;
+    padding: 2rem;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+a {
+    font-size: 2rem;
+    padding-bottom: 4px;
+}
+.active-link {
+    border-bottom: 3px solid white 
+}
