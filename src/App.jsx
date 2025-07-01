@@ -1,6 +1,7 @@
 import "./App.css";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import PostsList from "./components/PostsList";
 import { fetchMe } from "./api/auth";
 import { useEffect, useState } from "react";
 import { fetchAllPosts } from "./api/auth";
@@ -8,6 +9,7 @@ import { fetchAllPosts } from "./api/auth";
 function App () {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [user, setUser] = useState({});
+  const [posts, setPosts] = useState([]);
   
   useEffect(()=>{
     const getMe = async ()=>{
@@ -20,7 +22,18 @@ function App () {
     }
   }, [token]);
 
-  fetchAllPosts();
+  useEffect( ()=>{
+    const getInitialPosts = async ()=>{
+      try {
+        const postsToSet = await fetchAllPosts();
+        console.log(postsToSet,'this is poststoset inside the useeffect');
+        setPosts(postsToSet);
+      } catch (error) {
+        console.error('Error getting initial posts:',error)
+      }
+    }
+    getInitialPosts();
+  }, [])
 
   return (
     <div className="App">
@@ -29,7 +42,7 @@ function App () {
         <Login setToken={setToken}/>
       </header>
       <div>
-        Helloworld!
+        <PostsList posts={posts} setPosts={setPosts}/>
       </div>
     </div>
   ) 
