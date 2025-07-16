@@ -31,7 +31,6 @@ function App () {
     const getInitialPosts = async ()=>{
       try {
         const postsToSet = await fetchAllPosts();
-        console.log(postsToSet,'this is poststoset inside the useeffect');
         setPosts(postsToSet);
       } catch (error) {
         console.error('Error getting initial posts:',error)

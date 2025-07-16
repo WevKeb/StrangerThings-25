@@ -18,3 +18,22 @@ a {
 .active-link {
     border-bottom: 3px solid white 
 }
+
+.logout-corner {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  
+}
+
+#hello-user {
+   
+    font-size: 2rem;
+}
+
+#logout-btn {
+    height: 2rem;
+    font-size: 1rem;
+}

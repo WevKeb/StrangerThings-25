@@ -8,11 +8,7 @@ const Header = ({user, setToken}) => {
     return (
         <div className='navbar'>
             {user.username ? 
-                <nav className="loggedin-header">
-                    Hello {user.username}!
-                </nav>
-                :
-                <nav className='nav-links'>
+                <nav className="nav-links">
                     <NavLink
                         to='/'
                         end
@@ -25,6 +21,7 @@ const Header = ({user, setToken}) => {
                     >
                         Home
                     </NavLink>
+
                     <NavLink
                         to='/myposts'
                         className={({isActive})=>
@@ -35,6 +32,27 @@ const Header = ({user, setToken}) => {
                         }
                     >
                         My Posts
+                    </NavLink>
+                    <div className="logout-corner">
+                        <div id="hello-user">Hello {user.username}!</div>
+                        <button id="logout-btn">Logout</button>
+                    </div>
+                </nav>
+                
+                :
+
+                <nav className='nav-links'>
+                    <NavLink
+                        to='/'
+                        end
+                        className={({isActive})=>
+                            isActive ? 
+                            'active-link'
+                            :
+                            'nav-link'
+                        }
+                    >
+                        Home
                     </NavLink>
                     <Login setToken={setToken}/>
                 </nav>

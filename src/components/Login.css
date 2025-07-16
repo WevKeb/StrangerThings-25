@@ -12,7 +12,11 @@
 
 .divider {
   color: white;
-  font-size: 2rem; 
+  font-size: 2.5rem; 
   line-height: 1;
 
+}
+
+button {
+  font-size: 1rem;
 }
