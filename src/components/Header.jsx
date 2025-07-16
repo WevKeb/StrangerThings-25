@@ -14,7 +14,8 @@ const Header = ({user, setToken}) => {
                 :
                 <nav className='nav-links'>
                     <NavLink
-                        to='/home'
+                        to='/'
+                        end
                         className={({isActive})=>
                             isActive ? 
                             'active-link'

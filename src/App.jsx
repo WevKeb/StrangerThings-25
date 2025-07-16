@@ -45,7 +45,7 @@ function App () {
       <Header user={user} setToken={setToken}/>
       <Routes>
         <Route
-          path='/home'
+          path='/'
           element={<PostsList posts={posts} setPosts={setPosts}/>}
         ></Route>
         <Route 
