@@ -1,0 +1,46 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  padding-top: 10vh;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 4px 8px 0 #3f00ff, 0 6px 20px 0 #3f00ff;
+}
+
+label {
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+input,
+textarea {
+  margin-top: 5px;
+  padding: 8px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+textarea {
+  resize: vertical;
+  height: 10vh;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center; /* aligns checkbox and text vertically */
+  gap: 4px; /* controls space between checkbox and text */
+}
+
+.checkbox-label input {
+  margin: 0; /* removes default spacing */
+  padding: 0; /* optional: ensures no extra space */
+}

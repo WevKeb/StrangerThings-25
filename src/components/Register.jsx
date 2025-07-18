@@ -1,16 +1,19 @@
 import React from 'react';
 import { useState } from 'react';
 import { registerUser } from '../api/auth';
+import { useNavigate } from 'react-router-dom';
 
-const Register = ({setToken}) => {
+const Register = ({ setToken }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  
+
+  const navigate = useNavigate();
+
   return (
     <div className='reg-container'>
-      <form 
+      <form
         className='reg-form'
-        onSubmit={async (e)=>{
+        onSubmit={async (e) => {
           try {
             e.preventDefault();
             const token = await registerUser(username, password);
@@ -18,27 +21,28 @@ const Register = ({setToken}) => {
             localStorage.setItem('token', token);
             setUsername('');
             setPassword('');
+            navigate('/');
           } catch (error) {
             console.error(error);
           }
-          
-      }}>
-        <input 
-          value={username} 
-          type='text' 
+
+        }}>
+        <input
+          value={username}
+          type='text'
           placeholder='Username...'
-          onChange={(e)=>{
+          onChange={(e) => {
             setUsername(e.target.value)
           }}
         ></input>
-        <input 
-          value={password} 
-          type='password' 
+        <input
+          value={password}
+          type='password'
           placeholder='Password...'
-          onChange={(e)=>{
+          onChange={(e) => {
             setPassword(e.target.value)
           }}
-          ></input>
+        ></input>
         <button type='submit'>Register</button>
       </form>
     </div>

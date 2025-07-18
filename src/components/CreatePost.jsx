@@ -1,4 +1,5 @@
 import React from 'react';
+import './CreatePost.css'
 
 const CreatePost = () => {
     return (
@@ -51,7 +52,7 @@ const CreatePost = () => {
                     Will Deliver
                 </label>
 
-                <button type="submit">Create</button>
+                <button type="submit">Create Post!</button>
             </form>
         </div>
 
