@@ -1,0 +1,47 @@
+/* Container to center the form */
+.reg-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  
+}
+
+/* Form styling */
+.reg-form {
+    border: 1px solid #ccc;
+  padding: 2rem 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px #414bff;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Input fields */
+.reg-form input {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Submit button */
+.reg-form button {
+  padding: 0.75rem;
+  background-color: #414bff;
+box-sizing: border-box;
+  border: 3px solid transparent;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  font-size: 1rem;
+}
+
+.reg-form button:hover {
+  border-color: #888eff;
+}

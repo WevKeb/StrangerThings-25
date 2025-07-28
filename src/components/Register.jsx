@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { registerUser } from '../api/auth';
 import { useNavigate } from 'react-router-dom';
+import './Register.css'
 
 const Register = ({ setToken }) => {
   const [username, setUsername] = useState('');
@@ -27,6 +28,7 @@ const Register = ({ setToken }) => {
           }
 
         }}>
+        <h2>Create a new account here!</h2>
         <input
           value={username}
           type='text'
