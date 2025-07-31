@@ -31,11 +31,10 @@
   cursor: pointer;
   transition: border-color 0.25s;
 } 
+
 .card-button:hover {
   border-color: #888eff;
 }
-
-
 
 .modal-backdrop {
   position: fixed;
@@ -60,5 +59,6 @@
   border-radius: 10px;
   width: 33%;
   box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  gap: 3px;
 };
 

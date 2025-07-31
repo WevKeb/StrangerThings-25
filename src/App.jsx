@@ -46,7 +46,7 @@ function App() {
       <Routes>
         <Route
           path='/'
-          element={<PostsList posts={posts} setPosts={setPosts} />}
+          element={<PostsList posts={posts} setPosts={setPosts} user={user} />}
         ></Route>
         <Route
           path='/register'

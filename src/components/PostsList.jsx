@@ -3,9 +3,10 @@ import { fetchAllPosts } from '../api/auth';
 import { useState } from 'react';
 import './PostsList.css'
 
-const PostsList = ({ posts, setPosts }) => {
+const PostsList = ({ posts, setPosts, user }) => {
     const [selectedPost, setSelectedPost] = useState(null);
 
+    console.log(user, 'this is the logged in user');
     return (
         <div className="post-card-cnt">
             {posts.map((post) =>
@@ -37,7 +38,12 @@ const PostsList = ({ posts, setPosts }) => {
                         <button
                             onClick={() => {
                                 setSelectedPost(null)
-                            }}>Close</button>
+                            }}>Close
+                        </button>
+                        {selectedPost.author.username === user.username && (
+
+                            <button className='delete-btn'>Delete</button>
+                        )}
                     </div>
                 </div>
             )}
