@@ -1,10 +1,21 @@
 import React from 'react';
 import { fetchAllPosts } from '../api/auth';
 import { useState } from 'react';
+import { deletePost } from '../api/auth';
+import { toast } from 'react-toastify';
 import './PostsList.css'
 
-const PostsList = ({ posts, setPosts, user }) => {
+const PostsList = ({ posts, setPosts, user, setDeletedPost }) => {
     const [selectedPost, setSelectedPost] = useState(null);
+
+    const updateAllPosts = async () => {
+        try {
+            const postsToSet = await fetchAllPosts();
+            setPosts(postsToSet);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     console.log(user, 'this is the logged in user');
     return (
@@ -17,7 +28,6 @@ const PostsList = ({ posts, setPosts, user }) => {
                     <button
                         className="card-button"
                         onClick={() => {
-                            // console.log(user);
                             setSelectedPost(post);
 
                         }}
@@ -35,6 +45,8 @@ const PostsList = ({ posts, setPosts, user }) => {
                         </div>
                         <div>Location: {selectedPost.location}</div>
                         <div>Description: {selectedPost.description}</div>
+                        <div>ID: {selectedPost._id}</div>
+                        <div>Is Active: {selectedPost.active ? 'Yes' : 'No'}</div>
                         <button
                             onClick={() => {
                                 setSelectedPost(null)
@@ -42,7 +54,21 @@ const PostsList = ({ posts, setPosts, user }) => {
                         </button>
                         {selectedPost.author.username === user.username && (
 
-                            <button className='delete-btn'>Delete</button>
+                            <button
+                                className='delete-btn'
+                                onClick={async (e) => {
+                                    // e.preventDefault();
+                                    try {
+                                        await deletePost(selectedPost._id);
+                                        setSelectedPost(null);
+                                        setDeletedPost(true);
+                                        toast.success('Post deleted successfully');
+                                    } catch (error) {
+                                        console.error(error);
+                                        toast.error('Failed to delete post');
+                                    }
+                                }}
+                            >Delete</button>
                         )}
                     </div>
                 </div>

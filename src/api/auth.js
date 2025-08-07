@@ -86,8 +86,7 @@ export const fetchAllPosts = async () => {
 
 export const createNewPost = async (post) => {
   const token = localStorage.getItem("token");
-  // console.log(token);
-  // console.log(post, "this should be the post obj passed into api");
+
   try {
     const response = await fetch(
       `https://strangers-things.herokuapp.com/api/2211-FTB-ET-WEB-FT/posts`,
@@ -100,9 +99,32 @@ export const createNewPost = async (post) => {
         body: JSON.stringify({ post }),
       }
     );
-    // console.log(response, "this is response in createpostapi");
+
     const result = await response.json();
-    // console.log(result.data, "this is result in createpostapi");
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deletePost = async (postId) => {
+  const token = localStorage.getItem("token");
+
+  try {
+    const response = await fetch(
+      `https://strangers-things.herokuapp.com/api/2211-FTB-ET-WEB-FT/posts/${postId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const result = await response.json();
+    console.log(result, "this is result in delete api ");
     return result;
   } catch (error) {
     console.error(error);

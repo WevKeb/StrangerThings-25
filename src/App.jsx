@@ -1,4 +1,5 @@
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Register from "./components/Register";
 import CreatePost from "./components/CreatePost";
 import Login from "./components/Login";
@@ -13,6 +14,16 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [user, setUser] = useState({});
   const [posts, setPosts] = useState([]);
+  const [deletedPost, setDeletedPost] = useState(false);
+
+  const getInitialPosts = async () => {
+    try {
+      const postsToSet = await fetchAllPosts();
+      setPosts(postsToSet);
+    } catch (error) {
+      console.error('Error getting initial posts:', error)
+    }
+  };
 
   //useeffect to retrieve logged in user data. set to user, when token is set
   useEffect(() => {
@@ -29,24 +40,32 @@ function App() {
 
   //useeffect to setinitialposts on first render
   useEffect(() => {
-    const getInitialPosts = async () => {
-      try {
-        const postsToSet = await fetchAllPosts();
-        setPosts(postsToSet);
-      } catch (error) {
-        console.error('Error getting initial posts:', error)
-      }
-    }
     getInitialPosts();
   }, [])
+
+  //useeffect to rerender posts after deleting one aka posts obj changed
+  useEffect(() => {
+    if (deletedPost === true) {
+      getInitialPosts();
+      setDeletedPost(false);
+    }
+
+  }, [deletedPost]);
 
   return (
     <div className="App">
       <Header user={user} setToken={setToken} />
+      <ToastContainer position="bottom-right" autoClose={3000} />
       <Routes>
         <Route
           path='/'
-          element={<PostsList posts={posts} setPosts={setPosts} user={user} />}
+          element={<PostsList
+            posts={posts}
+            setPosts={setPosts}
+            user={user}
+            deletedPost={deletedPost}
+            setDeletedPost={setDeletedPost}
+          />}
         ></Route>
         <Route
           path='/register'
