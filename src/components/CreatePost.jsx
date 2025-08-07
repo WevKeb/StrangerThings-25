@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { createNewPost } from '../api/auth';
 import './CreatePost.css'
 
@@ -20,9 +21,19 @@ const CreatePost = () => {
                     e.preventDefault(); // prevent page reload
                     try {
                         const result = await createNewPost(post);
-                        console.log(result.data, 'should be returned obj');
+                        console.log(result, 'should be returned obj');
+                        if (result.success === true) {
+                            toast.success("Successfully created new post!")
+                            setPost({
+                                title: '',
+                                description: '',
+                                price: 0,
+                                willDeliver: false
+                            })
+                        }
                     } catch (error) {
                         console.error('Error creating post:', error);
+                        toast.error("Error creating new post");
                     }
                 }}
             >
@@ -37,9 +48,7 @@ const CreatePost = () => {
                         value={post.title}
                         onChange={(e) => {
                             setPost({ ...post, title: e.target.value })
-                            console.log(post);
-                        }
-                        }
+                        }}
                         required
                     />
                 </label>
@@ -51,9 +60,7 @@ const CreatePost = () => {
                         value={post.description}
                         onChange={(e) => {
                             setPost({ ...post, description: e.target.value })
-                            console.log(post);
-                        }
-                        }
+                        }}
                         required
                     />
                 </label>
@@ -66,9 +73,7 @@ const CreatePost = () => {
                         value={post.price}
                         onChange={(e) => {
                             setPost({ ...post, price: e.target.value })
-                            console.log(post);
-                        }
-                        }
+                        }}
                         required
                     />
                 </label>
@@ -80,7 +85,6 @@ const CreatePost = () => {
                         checked={post.willDeliver}
                         onChange={(e) => {
                             setPost({ ...post, willDeliver: e.target.checked })
-                            console.log(post);
                         }}
                     />
                     Will Deliver
