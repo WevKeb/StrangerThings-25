@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { createNewPost } from '../api/auth';
 import './CreatePost.css'
 
-const CreatePost = () => {
+const CreatePost = ({ setCreatedPost }) => {
     const [post, setPost] = useState({
         title: '',
         description: '',
@@ -21,7 +21,6 @@ const CreatePost = () => {
                     e.preventDefault(); // prevent page reload
                     try {
                         const result = await createNewPost(post);
-                        console.log(result, 'should be returned obj');
                         if (result.success === true) {
                             toast.success("Successfully created new post!")
                             setPost({
@@ -30,6 +29,7 @@ const CreatePost = () => {
                                 price: 0,
                                 willDeliver: false
                             })
+                            setCreatedPost(true);
                         }
                     } catch (error) {
                         console.error('Error creating post:', error);

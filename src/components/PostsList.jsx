@@ -17,7 +17,6 @@ const PostsList = ({ posts, setPosts, user, setDeletedPost }) => {
         }
     };
 
-    console.log(user, 'this is the logged in user');
     return (
         <div className="post-card-cnt">
             {posts.map((post) =>

@@ -15,6 +15,7 @@ function App() {
   const [user, setUser] = useState({});
   const [posts, setPosts] = useState([]);
   const [deletedPost, setDeletedPost] = useState(false);
+  const [createdPost, setCreatedPost] = useState(false);
 
   const getInitialPosts = async () => {
     try {
@@ -24,6 +25,11 @@ function App() {
       console.error('Error getting initial posts:', error)
     }
   };
+
+  //useeffect to setinitialposts on first render
+  useEffect(() => {
+    getInitialPosts();
+  }, [])
 
   //useeffect to retrieve logged in user data. set to user, when token is set
   useEffect(() => {
@@ -38,19 +44,21 @@ function App() {
     }
   }, [token]);
 
-  //useeffect to setinitialposts on first render
-  useEffect(() => {
-    getInitialPosts();
-  }, [])
-
   //useeffect to rerender posts after deleting one aka posts obj changed
   useEffect(() => {
     if (deletedPost === true) {
       getInitialPosts();
       setDeletedPost(false);
     }
-
   }, [deletedPost]);
+
+  //useeffect to rerender posts after creating one aka posts obj changed
+  useEffect(() => {
+    if (createdPost === true) {
+      getInitialPosts();
+      setCreatedPost(false);
+    }
+  }, [createdPost]);
 
   return (
     <div className="App">
@@ -65,6 +73,7 @@ function App() {
             user={user}
             deletedPost={deletedPost}
             setDeletedPost={setDeletedPost}
+
           />}
         ></Route>
         <Route
@@ -73,7 +82,10 @@ function App() {
         ></Route>
         <Route
           path='/createpost'
-          element={<CreatePost setToken={setToken} />}
+          element={<CreatePost
+            setToken={setToken}
+            setCreatedPost={setCreatedPost}
+          />}
         ></Route>
         {/* add route for user 'mypage' */}
       </Routes>
